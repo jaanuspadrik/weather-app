@@ -1,0 +1,16 @@
+.App {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.search {
+  margin: auto;
+  padding: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
