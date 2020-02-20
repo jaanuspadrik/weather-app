@@ -5,50 +5,44 @@ import Title from './Title';
 import './App.css';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      locations: [],
-      selected: false,
-      selectedCity: "",
-      value: {},
-      temperature: undefined,
-      wind: undefined,
-      error: undefined
-    }
-    this.handleChange = this.handleChange.bind(this);
-    this.getWeather = this.getWeather.bind(this);
+  state = {
+    locations: [],
+    selectedCity: undefined,
+    value: {},
+    temperature: undefined,
+    wind: undefined,
+    error: undefined
   }
   componentDidMount() {
-    var getCities = async (e) => {
-      const api_call = await fetch('https://weather.aw.ee/api/world/locations');
-      let data = await api_call.json();
-      let cities = [];
-      data.map(city => {
-        cities.push(city)
-      });
-      this.setState({locations: cities});
-    };
-    getCities();
+
   }
+  getCities = async (e) => {
+    const api_call = await fetch('https://weather.aw.ee/api/world/locations');
+    let data = await api_call.json();
+    let cities = [];
+    data.map(city => {
+      cities.push(city)
+    });
+    this.setState({locations: cities});
+  };
   getWeather = async (event) => {
     event.preventDefault();
     const city = event.target.elements.city.value;
     if (city) {
       const api_call = await fetch(`https://weather.aw.ee/api/world/locations/${this.state.value.code}`);
       const data = await api_call.json();
+      console.log(data);
       this.setState({
         temperature: data.temperature.value,
         wind: data.wind.value,
-        selected: true,
         selectedCity: this.state.value.name,
-        error: ""
+        error: "",
+        locations: []
       });
       document.getElementById("valik").reset();
     } else {
       this.setState({
-        selected: false,
-        selectedCity: "",
+        selectedCity: undefined,
         value: {},
         temperature: undefined,
         wind: undefined,
@@ -56,10 +50,9 @@ class App extends Component {
       });
       document.getElementById("valik").reset();
     }
-
   }
-  handleChange(event) {
-    console.log(event.target.value);
+  handleChange = (event) => {
+    this.getCities();
     let otsing = this.state.locations.find(city => city.name === event.target.value);
     if(otsing) {
       this.setState({value: otsing})

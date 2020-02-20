@@ -4,7 +4,7 @@ import './App.css';
 const Form = props => (
   <div className="search">
     <form id="valik" onSubmit={props.getWeather}>
-      <input type="text" name="city" list="cities" autocomplete="off" onChange={props.handleChange}/>
+      <input type="text" name="city" list="cities" autoComplete="off" onChange={props.handleChange}/>
       <datalist id="cities">
         {props.locations.map((obj) => {
           return <option key={obj.code} value={obj.name}>{obj.name}</option>
