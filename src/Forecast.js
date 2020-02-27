@@ -1,13 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
 
-const Forecast = props => (
-  <div className="forecast">
-    {props.city && <h1>{props.city}</h1>}
-    {props.temperature && <p>Temperatuur: {props.temperature} °C</p>}
-    {props.wind && <p>Tuulekiirus: {props.wind} m/s</p>}
-    {props.error && <p>{props.error}</p>}
-  </div>
-)
+const Forecast = (props) => {
+  const {city, temperature, wind, error} = props;
+  return (
+    <div className="forecast">
+      {city && <h1>{city}</h1>}
+      {temperature && <p>Temperatuur: {temperature} °C</p>}
+      {wind && <p>Tuulekiirus: {wind} m/s</p>}
+      {error && <p>{error}</p>}
+    </div>
+  )
+}
 
 export default Forecast;

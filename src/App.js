@@ -31,7 +31,6 @@ class App extends Component {
     if (city) {
       const api_call = await fetch(`https://weather.aw.ee/api/world/locations/${this.state.value.code}`);
       const data = await api_call.json();
-      console.log(data);
       this.setState({
         temperature: data.temperature.value,
         wind: data.wind.value,
